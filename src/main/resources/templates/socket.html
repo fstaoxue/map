@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>socket</title>
+</head>
+<body>
+<textarea id="area" rows="30" cols="50"></textarea>
+</body>
+<script th:src="@{/js/jquery-1.9.1.js}" type="text/javascript"></script>
+<script type="text/javascript" th:inline="javascript">
+    $(function(){
+        var socket=new WebSocket("ws://localhost:8290/map/websocket");
+
+        socket.onmessage=function (message) {
+            addMessageToPage("收到-->"+JSON.stringify(message.data));
+        };
+        socket.onopen=function () {
+            addMessageToPage("open");
+        };
+        socket.onerror=function (ev) {
+            addMessageToPage("error");
+        };
+        socket.onclose=function (ev) {
+            addMessageToPage("error");
+        };
+        setInterval(function () {
+            socket.send("page"+new Date().getTime()+"后端-->");
+        },1000)
+    })
+
+    function addMessageToPage(message){
+        $("#area").append(message+"\n");
+    }
+</script>
+</html>
