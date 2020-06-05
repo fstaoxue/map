@@ -25,7 +25,7 @@
             <button type="button" id="btn-upload" class="btn btn-default">开始上传</button>
         </form>
     </div>
-
+    <button id="download">文件下载</button>
     <div class="row">
         <textarea rows="10" cols="150" id="locs"></textarea>
     </div>
@@ -46,7 +46,21 @@
     $(function(){
         init_event();
         init_map();
+        init_download();
     })
+
+    function init_download(){
+        $("#download").click(function(){
+            $.ajax({
+                type:'post',
+                url:'/map/upload/downloadTemplate',
+                data:{},
+                success:function () {
+                    
+                }
+            })
+        })
+    }
 
     function init_event(){
         $("#btn-upload").click(function(){
@@ -112,9 +126,8 @@
                 var z=coord[0];
                 var x=coord[1];
                 var y=-coord[2]-1;
-                var url='http://162.168.1.117:8080/map/cq';
-                z=z<10?"0"+z:z;
-                url+="/"+z+"/"+pad(y)+"-"+pad(x)+'.jpg';
+                var url='http://mt2.google.cn/vt/lyrs=m&scale=2&hl=zh-CN&gl=cn';
+                url+="&x=" + x+ "&y=" + y+ "&z="+z;
                 return url;
             }
         })

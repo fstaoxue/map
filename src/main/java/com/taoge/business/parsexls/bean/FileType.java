@@ -7,7 +7,7 @@ package com.taoge.business.parsexls.bean;
 public enum FileType {
 
     XLS("xls"),
-    XXLS("xxls"),
+    XXLS("xlsx"),
     TXT("txt");
     private String type;
 

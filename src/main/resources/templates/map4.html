@@ -74,25 +74,44 @@
 
 
     function drawHeatMap(){
-        $.get("/map/json/china5a.csv",function (data) {
-            var allRows = data.split(/\r?\n|\r/);
-            allRows.shift();
-            var points = allRows.map(function(row) {
-                var item = row.split(',');
-                var coords = row.match(/"(.*)"/)[1].split(',');
-                return {
-                    coords: [parseFloat(coords[0]), parseFloat(coords[1])],
-                    name: item[2],
-                    city: item[0]
-                }
-            });
-            var features=points.map(function(point){
-                return new ol.Feature({
-                    geometry:new ol.geom.Point(point.coords)
-                })
-            });
-            vector.getSource().addFeatures(features);
-        })
+        var allRows=getData();
+        var points = allRows.map(function(row) {
+            return {
+                coords: [parseFloat(row.lng), parseFloat(row.lat)],
+                name: row.name,
+                city: row.city
+            }
+        });
+        var features=points.map(function(point){
+            return new ol.Feature({
+                geometry:new ol.geom.Point(point.coords)
+            })
+        });
+        vector.getSource().addFeatures(features);
+        map.getView().setCenter([allRows[0].lng,allRows[0].lat])
+    }
+
+    function getData(){
+        var allRows=[];
+        for(var i=0;i<100;i++){
+            allRows.push({
+                lat:getRandom("29."),
+                lng:getRandom("106."),
+                name:'hello',
+                city:'pp'
+            })
+        }
+        return allRows;
+    }
+
+
+    function getRandom(prefix){
+        var result=prefix;
+        for(var i=0;i<5;i++){
+            var number=Math.floor(Math.random()*10);
+            result+=number;
+        }
+        return result;
     }
 
 
