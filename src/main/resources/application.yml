@@ -15,7 +15,7 @@ spring:
     cache: false
   datasource:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://114.55.64.105:3306/webtls_develop?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+      url: jdbc:mysql://114.55.64.105:3306/address?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
       username: root
       password: TXF19950605..
   jpa:
