@@ -49,7 +49,7 @@ public class UploadController {
         return AjaxResult.error();
     }
 
-    @PostMapping("/downloadTemplate")
+    @GetMapping("/downloadTemplate")
     public void downloadTemplat(HttpServletResponse response) {
 
         InputStream fis = UploadController.class.getClassLoader().getResourceAsStream("template/phone.xlsx");
@@ -57,10 +57,9 @@ public class UploadController {
             XSSFWorkbook xssfWorkbook=new XSSFWorkbook(fis);
             response.setContentType("application/octet-stream");
             response.setHeader("content-type", "application/octet-stream");
-            response.addHeader("Content-Disposition", "attachment;filename=" + new String("template".getBytes()));
+            response.setHeader("Content-Disposition", "attachment;fileName=template.xlsx");
             xssfWorkbook.write(response.getOutputStream());
             xssfWorkbook.close();
-            response.getOutputStream().close();
         } catch (IOException e) {
             e.printStackTrace();
         }

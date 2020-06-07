@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.taoge.business.main.entity.BisUser;
 import com.taoge.business.main.service.BisUserService;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,8 +32,6 @@ public class BisUserController {
         if(StringUtils.isNotEmpty(account)){
             System.out.println("limit-->"+limit+",offset-->"+offset+",account-->"+account);
         }
-
-
         Pageable pageable= PageRequest.of(offset+1,limit, Sort.by(Sort.Order.desc("id")));
         Page<BisUser> page=bisUserService.listAllBisUsers(account,pageable);
         JSONObject result=new JSONObject();

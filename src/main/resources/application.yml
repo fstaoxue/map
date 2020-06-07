@@ -2,6 +2,8 @@ server:
   port: 8290
   servlet:
     context-path: /map
+
+
 spring:
   thymeleaf:
     prefix: classpath:/templates/
@@ -18,3 +20,8 @@ spring:
       password: TXF19950605..
   jpa:
     show-sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB

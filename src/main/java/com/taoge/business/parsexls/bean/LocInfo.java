@@ -3,7 +3,7 @@ package com.taoge.business.parsexls.bean;
 import com.taoge.business.main.bean.Excel;
 
 /**
- * @author 1001234
+ * @author taoxuefeng
  * @date 2019/05/22
  */
 public class LocInfo {
